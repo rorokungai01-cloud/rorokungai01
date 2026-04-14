@@ -329,44 +329,45 @@ def build_demo(
                             lines=4,
                             placeholder="พิมพ์สิ่งที่ต้องการให้ AI พูดที่นี่...",
                         )
-                        gr.Markdown("<span style='font-size:0.85em;color:#888;'>ปุ่มเพิ่มอารมณ์/เสียงเสริม (คลิกเพื่อแทรกลงในข้อความ):</span>")
-                        
-                        _action_tags = [
-                            ("😂 หัวเราะ", "[laughter]"),
-                            ("😮‍💨 ถอนหายใจ", "[sigh]"),
-                            ("😤 ฮึ่ม! (ไม่พอใจ)", "[dissatisfaction-hnn]"),
-                            ("อืม/อาฮะ (ตอบรับ)", "[confirmation-en]"),
-                            ("🤔 หืม? (สงสัย)", "[question-en]"),
-                            ("🤨 อาฮะ? (สงสัย)", "[question-ah]"),
-                            ("😧 โอ้? (สงสัย)", "[question-oh]"),
-                            ("เอ๊ะ? (สงสัย)", "[question-ei]"),
-                            ("หึ? (สงสัย)", "[question-yi]"),
-                            ("😳 อ้า! (ตกใจ)", "[surprise-ah]"),
-                            ("😲 โอ้! (ตกใจ)", "[surprise-oh]"),
-                            ("😱 หวา! (ตกใจ)", "[surprise-wa]"),
-                            ("😎 โย่ว! (ตกใจ)", "[surprise-yo]")
-                        ]
-                        
-                        _tag_btns = []
-                        with gr.Row():
-                            for th_label, tag_code in _action_tags[:5]:
-                                _btn = gr.Button(th_label, size="sm")
-                                _tag_btns.append((_btn, tag_code))
-                        with gr.Row():
-                            for th_label, tag_code in _action_tags[5:9]:
-                                _btn = gr.Button(th_label, size="sm")
-                                _tag_btns.append((_btn, tag_code))
-                        with gr.Row():
-                            for th_label, tag_code in _action_tags[9:]:
-                                _btn = gr.Button(th_label, size="sm")
-                                _tag_btns.append((_btn, tag_code))
-                                
-                        for _btn, _tag_code in _tag_btns:
-                            _btn.click(
-                                lambda t, tg=_tag_code: f"{t} {tg}".strip() if t else tg, 
-                                inputs=[vc_text], 
-                                outputs=[vc_text]
-                            )
+                        with gr.Accordion("🎭 ป้ายกำกับอารมณ์/เสียงเสริม (Action Tags)", open=False):
+                            gr.Markdown("<span style='font-size:0.85em;color:#888;'>ปุ่มเพิ่มอารมณ์/เสียงเสริม (คลิกเพื่อแทรกลงในข้อความ):</span>")
+                            
+                            _action_tags = [
+                                ("😂 หัวเราะ", "[laughter]"),
+                                ("😮‍💨 ถอนหายใจ", "[sigh]"),
+                                ("😤 ฮึ่ม! (ไม่พอใจ)", "[dissatisfaction-hnn]"),
+                                ("อืม/อาฮะ (ตอบรับ)", "[confirmation-en]"),
+                                ("🤔 หืม? (สงสัย)", "[question-en]"),
+                                ("🤨 อาฮะ? (สงสัย)", "[question-ah]"),
+                                ("😧 โอ้? (สงสัย)", "[question-oh]"),
+                                ("เอ๊ะ? (สงสัย)", "[question-ei]"),
+                                ("หึ? (สงสัย)", "[question-yi]"),
+                                ("😳 อ้า! (ตกใจ)", "[surprise-ah]"),
+                                ("😲 โอ้! (ตกใจ)", "[surprise-oh]"),
+                                ("😱 หวา! (ตกใจ)", "[surprise-wa]"),
+                                ("😎 โย่ว! (ตกใจ)", "[surprise-yo]")
+                            ]
+                            
+                            _tag_btns = []
+                            with gr.Row():
+                                for th_label, tag_code in _action_tags[:5]:
+                                    _btn = gr.Button(th_label, size="sm")
+                                    _tag_btns.append((_btn, tag_code))
+                            with gr.Row():
+                                for th_label, tag_code in _action_tags[5:9]:
+                                    _btn = gr.Button(th_label, size="sm")
+                                    _tag_btns.append((_btn, tag_code))
+                            with gr.Row():
+                                for th_label, tag_code in _action_tags[9:]:
+                                    _btn = gr.Button(th_label, size="sm")
+                                    _tag_btns.append((_btn, tag_code))
+                                    
+                            for _btn, _tag_code in _tag_btns:
+                                _btn.click(
+                                    lambda t, tg=_tag_code: f"{t} {tg}".strip() if t else tg, 
+                                    inputs=[vc_text], 
+                                    outputs=[vc_text]
+                                )
 
                         vc_ref_audio = gr.Audio(
                             label="ไฟล์เสียงต้นแบบ (Reference Audio)",
